@@ -1,0 +1,14 @@
+ea4bc82a6ad023ab7ee23ee620429895
+::res://::1717409211
+export_presets.cfg::TextFile::-1::1717324476::0::1::::<><>::
+icon.svg::CompressedTexture2D::4216576545896335221::1717242861::1717242871::1::::<><>::
+::res://relese/::1717324591
+::res://sence/::1717341429
+AI.gd::GDScript::-1::1717259805::0::1::::<>StaticBody2D<>::
+Ball.gd::GDScript::-1::1717259932::0::1::::<>CharacterBody2D<>::
+Human.gd::GDScript::-1::1717259961::0::1::::<>StaticBody2D<>::
+Ponggame.gd::GDScript::-1::1717258748::0::1::::<>ColorRect<>::
+Ponggame.tscn::PackedScene::5533675455170294308::1717341429::0::1::::<><>::res://sence/Ponggame.gd<>res://sence/Human.gd<>res://sence/Ball.gd<>res://sence/AI.gd<>uid://c0bnhnqg7k4bi::::res://sound/hit.wav<>uid://b2mkic188beo4::::res://sound/lost.wav
+::res://sound/::1717257671
+hit.wav::AudioStreamWAV::6530429365390594222::1717257136::1717257671::1::::<><>::
+lost.wav::AudioStreamWAV::4306913598002724161::1717257097::1717257671::1::::<><>::
