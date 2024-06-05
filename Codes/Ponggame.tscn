@@ -1,0 +1,109 @@
+[gd_scene load_steps=11 format=3 uid="uid://ck3s3dft0fjiy"]
+
+[ext_resource type="Script" path="res://sence/Ponggame.gd" id="1_0luw5"]
+[ext_resource type="Script" path="res://sence/Human.gd" id="2_rpc5u"]
+[ext_resource type="Script" path="res://sence/Ball.gd" id="3_jskh0"]
+[ext_resource type="Script" path="res://sence/AI.gd" id="3_xl4bx"]
+[ext_resource type="AudioStream" uid="uid://c0bnhnqg7k4bi" path="res://sound/hit.wav" id="5_vd414"]
+[ext_resource type="AudioStream" uid="uid://b2mkic188beo4" path="res://sound/lost.wav" id="6_bj6lf"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3rq88"]
+size = Vector2(4.80015, 73.4099)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_o6kcm"]
+size = Vector2(40, 40)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_y6msc"]
+size = Vector2(1149.5, 38.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_r4x7e"]
+size = Vector2(34, 652)
+
+[node name="mine" type="ColorRect"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 2.0
+offset_right = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+script = ExtResource("1_0luw5")
+
+[node name="Human" type="StaticBody2D" parent="."]
+position = Vector2(128, 256)
+script = ExtResource("2_rpc5u")
+
+[node name="ColorRect" type="ColorRect" parent="Human"]
+offset_right = 25.0
+offset_bottom = 98.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Human"]
+position = Vector2(22.5, 49)
+scale = Vector2(1.04163, 1.33497)
+shape = SubResource("RectangleShape2D_3rq88")
+
+[node name="CPU" type="StaticBody2D" parent="."]
+position = Vector2(1000, 256)
+script = ExtResource("3_xl4bx")
+
+[node name="ColorRect" type="ColorRect" parent="CPU"]
+offset_right = 25.0
+offset_bottom = 98.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CPU"]
+position = Vector2(12.5, 49)
+scale = Vector2(1.04163, 1.33497)
+shape = SubResource("RectangleShape2D_3rq88")
+
+[node name="Ball" type="CharacterBody2D" parent="."]
+position = Vector2(-234, -11)
+collision_mask = 3
+script = ExtResource("3_jskh0")
+
+[node name="ColorRect" type="ColorRect" parent="Ball"]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ball"]
+position = Vector2(20, 20)
+shape = SubResource("RectangleShape2D_o6kcm")
+
+[node name="border" type="StaticBody2D" parent="."]
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="border"]
+position = Vector2(577.25, -19.25)
+shape = SubResource("RectangleShape2D_y6msc")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="border"]
+position = Vector2(576, 665.5)
+shape = SubResource("RectangleShape2D_y6msc")
+
+[node name="Scrour left" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Scrour left"]
+position = Vector2(-8, 322)
+shape = SubResource("RectangleShape2D_r4x7e")
+
+[node name="Scrour right" type="Area2D" parent="."]
+position = Vector2(1160, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Scrour right"]
+position = Vector2(-8, 322)
+shape = SubResource("RectangleShape2D_r4x7e")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+autostart = true
+
+[node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_vd414")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_bj6lf")
+
+[connection signal="body_entered" from="Scrour left" to="." method="_on_scrour_left_body_entered"]
+[connection signal="body_entered" from="Scrour right" to="." method="_on_scrour_right_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
